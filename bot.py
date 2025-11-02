@@ -11,6 +11,7 @@ import re
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from flask import Flask, request, jsonify, abort # <-- ওয়েব সার্ভার
+from flask_cors import CORS # <-- এই নতুন লাইনটি যোগ করুন
 import logging
 
 # --- লগিং সেটআপ ---
