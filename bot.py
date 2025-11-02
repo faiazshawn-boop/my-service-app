@@ -11,7 +11,7 @@ import re
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from flask import Flask, request, jsonify, abort # <-- ওয়েব সার্ভার
-from flask_cors import CORS # <-- CORS (ক্রস-অরিজিন) সমাধানের জন্য
+from flask_cors import CORS # <-- এই নতুন লাইনটি যোগ করা হয়েছে
 import logging
 
 # --- লগিং সেটআপ ---
@@ -27,10 +27,12 @@ MINI_APP_URL = "https://faiazshawn-boop.github.io/my-service-app/" # আপন�
 
 # ===== নতুন: ওয়েব সার্ভার অ্যাপ =====
 app = Flask(__name__)
+CORS(app) # <-- এই নতুন লাইনটি যোগ করা হয়েছে
 bot = telebot.TeleBot(TOKEN, threaded=False) # Webhook-এর জন্য threaded=False
 
 # ===== গুগল শীট কনফিগারেশন =====
 try:
+    # Environment Variable থেকে JSON স্ট্রিং লোড করা
     creds_json_string = os.environ.get("GOOGLE_CREDENTIALS_JSON")
     if creds_json_string:
         creds_dict = json.loads(creds_json_string)
@@ -49,7 +51,7 @@ try:
     products_config_sheet = sheet.worksheet("products_config")
     previous_products_sheet = sheet.worksheet("previous_products")
     transactions_sheet = sheet.worksheet("transactions")
-    pinned_messages_sheet = sheet.worksheet("pinned_messages")
+    pinned_messages_sheet = sheet.workskey("pinned_messages")
     logger.info("Google Sheet সফলভাবে কানেক্ট হয়েছে।")
 
 except Exception as e:
@@ -251,7 +253,10 @@ def gs_load_all_data():
         for item in config_data:
             key = str(item.get('key', '')) # .get() ব্যবহার
             if not key: continue # খালি সারি উপেক্ষা করুন
-            products_config[key] = {"price": float(item.get('price')),"enabled": bool(item.get('enabled') == 'TRUE' or item.get('enabled') == True)}
+            try: price = float(item.get('price'))
+            except (ValueError, TypeError): price = 0
+            
+            products_config[key] = {"price": price, "enabled": bool(item.get('enabled') == 'TRUE' or item.get('enabled') == True)}
         
         # 4. previous_products লোড
         prev_config_data = previous_products_sheet.get_all_records()
@@ -259,7 +264,10 @@ def gs_load_all_data():
         for item in prev_config_data:
             key = str(item.get('key', '')) # .get() ব্যবহার
             if not key: continue # খালি সারি উপেক্ষা করুন
-            previous_products_config[key] = {"price": float(item.get('price')),"enabled": bool(item.get('enabled') == 'TRUE' or item.get('enabled') == True)}
+            try: price = float(item.get('price'))
+            except (ValueError, TypeError): price = 0
+                
+            previous_products_config[key] = {"price": price, "enabled": bool(item.get('enabled') == 'TRUE' or item.get('enabled') == True)}
 
         # 5. pinned_messages লোড
         pinned_data = pinned_messages_sheet.get_all_records()
@@ -286,10 +294,10 @@ def gs_load_all_data():
                 base_products[key]['enabled'] = config.get('enabled', base_products[key].get('enabled', True))
         products = base_products
         
-        if not config_data:
+        if len(config_data) <= 1: # শুধু হেডার থাকলে
             logger.warning("'products_config' শীটটি খালি। বেস প্রোডাক্ট দিয়ে পূরণ করা হচ্ছে...")
             gs_init_products_config()
-        if not prev_config_data:
+        if len(prev_config_data) <= 1: # শুধু হেডার থাকলে
             logger.warning("'previous_products' শীটটি খালি। বর্তমান প্রোডাক্ট দিয়ে পূরণ করা হচ্ছে...")
             if not products_config:
                  temp_config = {k: {'price': p['price'], 'enabled': p.get('enabled', True)} for k, p in base_products.items()}
@@ -310,7 +318,7 @@ def gs_update_user_data(user_id_str, balance=None, whatsapp=None, pinned_msg_id=
             if balance is not None: users_sheet.update_cell(row_index, 2, balance) 
             if whatsapp is not None: users_sheet.update_cell(row_index, 3, whatsapp)
         else:
-            new_row = [user_id_str, 0, None]
+            new_row = [user_id_str, 0, "N/A"] # ডিফল্ট "N/A"
             if balance is not None: new_row[1] = balance
             if whatsapp is not None: new_row[2] = whatsapp
             users_sheet.append_row(new_row)
@@ -1042,7 +1050,11 @@ def admin_send_reply(message):
 # ===== পুরানো অর্ডার ফ্লো ফাংশনগুলো ডিজেবল করা =====
 @bot.message_handler(func=lambda m: str(m.chat.id) in user_orders)
 def handle_legacy_order(message):
-    bot.send_message(message.chat.id, "অনুগ্রহ করে '🛒 সার্ভিস মেনু' বাটনটি ব্যবহার করে অর্ডার করুন।")
+    try:
+        bot.send_message(message.chat.id, "অনুগ্রহ করে '🛒 সার্ভিস মেনু' বাটনটি ব্যবহার করে অর্ডার করুন।")
+    except Exception as e:
+        logger.error(f"Legacy order message error: {e}")
+
 @bot.message_handler(content_types=['text'])
 def handle_all_text(message):
     if message.chat.id == ADMIN_ID and message.text == "/admin":
@@ -1051,15 +1063,24 @@ def handle_all_text(message):
         # ইউজারকে মেনু বাটন ব্যবহার করতে বলা
         start(message)
 
+
 # ===== বট এবং সার্ভার চালু করা =====
-# (এই অংশটি Gunicorn দ্বারা চালিত হবে)
 if __name__ != "__main__":
+    # এই অংশটি Gunicorn (Render.com) দ্বারা চালিত হবে
     logger.info("Gunicorn সার্ভার হিসেবে চালু হচ্ছে...")
     try:
         logger.info("বট ডেটা লোড করা হচ্ছে...")
         gs_load_all_data()
         
-        # Webhook সেটআপটি / রুট থেকে করা হবে, এখানে নয়
+        # Webhook সেটআপটি / রুট থেকে করা হবে
         
     except Exception as e:
         logger.error(f"Gunicorn চালু করার সময় এরর: {e}")
+
+# (লোকাল টেস্টিং-এর জন্য এই অংশটি রাখা যেতে পারে)
+if __name__ == "__main__":
+    logger.info("লোকাল মেশিনে Flask + Polling দিয়ে চলছে (টেস্টিং)...")
+    gs_load_all_data()
+    bot.remove_webhook()
+    threading.Thread(target=bot.infinity_polling, daemon=True).start()
+    app.run(debug=True, port=int(os.environ.get('PORT', 5001)))
