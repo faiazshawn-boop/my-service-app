@@ -1,0 +1,180 @@
+/* বেসিক রিসেট এবং অ্যাপের থিম */
+:root {
+    --tg-theme-bg-color: #f4f4f9;
+    --tg-theme-text-color: #1c1c1e;
+    --tg-theme-button-color: #007aff;
+    --tg-theme-button-text-color: #ffffff;
+    --tg-theme-hint-color: #99999e;
+    --card-bg-color: #ffffff;
+    --danger-color: #ff3b30;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 15px;
+    background-color: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
+    overscroll-behavior: none; /* বাউন্স ইফেক্ট বন্ধ করা */
+}
+
+/* উপরের হেডার */
+.app-header {
+    margin-bottom: 20px;
+}
+.app-header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.app-header p {
+    font-size: 1rem;
+    color: var(--tg-theme-hint-color);
+    margin-top: 0;
+}
+
+/* পেজ হাইড/শো করার সিস্টেম */
+.page {
+    display: none; /* ডিফল্টভাবে সব পেজ লুকানো */
+}
+.page.active {
+    display: block; /* শুধু একটিভ পেজ দেখানো হবে */
+    animation: fadeIn 0.3s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* সার্ভিস লিস্ট (লোগো ছাড়া ডিজাইন) */
+.service-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.service-item {
+    display: flex;
+    align-items: center;
+    background-color: var(--card-bg-color);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.service-item:active {
+    transform: scale(0.98);
+}
+.service-info {
+    flex-grow: 1; /* বাকি সব জায়গা দখল করবে */
+}
+.service-info strong {
+    font-size: 1rem;
+    font-weight: 600;
+    display: block;
+    color: var(--tg-theme-text-color);
+}
+.service-info span {
+    font-size: 0.85rem;
+    color: var(--tg-theme-hint-color);
+}
+.service-price {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--tg-theme-button-color);
+    margin-left: 10px;
+}
+
+/* অর্ডার ফর্ম */
+.form-card { 
+    background: var(--card-bg-color); 
+    padding: 20px; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07); 
+}
+.form-group { 
+    margin-bottom: 15px; 
+}
+.form-group label { 
+    display: block; 
+    font-weight: 600; 
+    margin-bottom: 5px; 
+    font-size: 0.9rem; 
+}
+.form-group input, .form-group select { 
+    width: 100%; 
+    padding: 12px; 
+    border: 1px solid #e0e0e0; 
+    border-radius: 8px; 
+    font-size: 1rem; 
+    box-sizing: border-box; /* এটি গুরুত্বপূর্ণ */
+}
+.price-display { 
+    font-size: 1.1rem; 
+    font-weight: 600;
+    margin: 10px 0; 
+    color: var(--tg-theme-button-color);
+}
+hr { 
+    border: none; 
+    border-top: 1px solid #e0e0e0; 
+    margin: 20px 0; 
+}
+.photo-notice {
+    font-size: 0.9rem;
+    color: var(--tg-theme-hint-color);
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* বাটনসমূহ */
+.btn {
+    padding: 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+.btn-primary {
+    background-color: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+}
+.btn-secondary {
+    background-color: #e5e5ea;
+    color: #000;
+}
+
+/* লোডার (লুকানো) */
+#loader-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255, 255, 255, 0.8); 
+    display: none; /* ডিফল্টভাবে লুকানো */
+    align-items: center; justify-content: center;
+    z-index: 9999; 
+    backdrop-filter: blur(5px);
+}
+#loader-overlay.active {
+    display: flex; /* দেখানোর জন্য */
+}
+.loader-content {
+    background: var(--card-bg-color);
+    padding: 20px 30px; 
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    color: var(--tg-theme-text-color);
+}
+.spinner {
+    width: 40px; height: 40px; border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--tg-theme-button-color);
+    border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 10px auto;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }

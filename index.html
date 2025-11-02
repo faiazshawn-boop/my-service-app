@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Service Order</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <header class="app-header">
+        <h1>সার্ভিস অর্ডার করুন</h1>
+        <p id="header-description">অনুগ্রহ করে একটি সার্ভিস সিলেক্ট করুন এবং তথ্য পূরণ করুন।</p>
+    </header>
+
+    <main id="app-content">
+        <section id="page-services" class="page active">
+            <div class="service-list" id="service-list-container">
+                </div>
+        </section>
+
+        <section id="page-order-form" class="page">
+            <div id="order-form-container"></div>
+        </section>
+    </main>
+    
+    <div id="loader-overlay">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>অর্ডার সাবমিট হচ্ছে...</p>
+        </div>
+    </div>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="script.js?v=1"></script>
+</body>
+</html>
