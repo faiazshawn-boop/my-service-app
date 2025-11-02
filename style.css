@@ -1,0 +1,208 @@
+/* বেসিক রিসেট এবং অ্যাপের থিম */
+:root {
+    --tg-theme-bg-color: #f4f4f9;
+    --tg-theme-text-color: #1c1c1e;
+    --tg-theme-button-color: #007aff;
+    --tg-theme-button-text-color: #ffffff;
+    --tg-theme-hint-color: #99999e;
+    --card-bg-color: #ffffff;
+    --danger-color: #ff3b30;
+    --success-color: #34c759;
+    --pending-color: #ff9500;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 15px;
+    padding-bottom: 70px; /* নিচের নেভিগেশন বারের জন্য জায়গা */
+    background-color: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
+    overscroll-behavior: none; /* বাউন্স ইফেক্ট বন্ধ করা */
+}
+
+/* উপরের হেডার এবং ব্যালেন্স কার্ড */
+.app-header {
+    margin-bottom: 20px;
+}
+.app-header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.balance-card {
+    background: linear-gradient(135deg, #007aff, #0056b3);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 122, 255, 0.2);
+}
+.balance-card span {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+.balance-card h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 5px 0 0 0;
+}
+
+/* পেজ হাইড/শো করার সিস্টেম */
+.page {
+    display: none; /* ডিফল্টভাবে সব পেজ লুকানো */
+}
+.page.active {
+    display: block; /* শুধু একটিভ পেজ দেখানো হবে */
+    animation: fadeIn 0.3s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* সার্ভিস লিস্ট (আপনার লোগোসহ ডিজাইন) */
+.service-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.service-item {
+    display: flex;
+    align-items: center;
+    background-color: var(--card-bg-color);
+    padding: 12px 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.service-item:active {
+    transform: scale(0.98);
+}
+.service-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    margin-right: 15px;
+    object-fit: cover;
+    background-color: #eee; /* লোগো লোড না হলে দেখাবে */
+}
+.service-info {
+    flex-grow: 1; /* বাকি সব জায়গা দখল করবে */
+}
+.service-info strong {
+    font-size: 1rem;
+    font-weight: 600;
+    display: block;
+    color: var(--tg-theme-text-color);
+}
+.service-info span {
+    font-size: 0.85rem;
+    color: var(--tg-theme-hint-color);
+}
+.service-price {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--tg-theme-button-color);
+    margin-left: 10px;
+}
+
+/* অর্ডার হিস্টরি টেবিল (আপনার ডিজাইন) */
+.history-table {
+    width: 100%;
+    overflow-x: auto; /* ছোট স্ক্রিনে স্ক্রল করা যাবে */
+    background: var(--card-bg-color);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    font-size: 0.85rem; /* টেবিলের লেখা ছোট করা */
+}
+.history-header, .history-row {
+    display: grid;
+    /* # | ধরন | তথ্য | ডাউনলোড | রেট | সময় */
+    grid-template-columns: 25px 1.5fr 1fr 1.2fr 0.8fr 1fr; 
+    gap: 10px;
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--tg-theme-bg-color);
+    align-items: center;
+}
+.history-header {
+    font-weight: 600;
+    color: var(--tg-theme-hint-color);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+.history-row:last-child {
+    border-bottom: none;
+}
+.history-row div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.history-row strong {
+    font-weight: 600;
+}
+
+/* বাটনসমূহ */
+.btn, .status-btn {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--tg-theme-button-text-color);
+    background-color: var(--tg-theme-button-color);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+.btn-secondary {
+    background-color: #e5e5ea;
+    color: #000;
+}
+.status-btn.success { background-color: var(--success-color); }
+.status-pending { 
+    color: var(--pending-color); 
+    font-weight: 600; 
+    font-size: 0.85rem;
+}
+.status-cancelled { 
+    color: var(--danger-color); 
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* নিচের নেভিগেশন বার */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--card-bg-color);
+    border-top: 1px solid #e0e0e0;
+    padding: 8px 0;
+    padding-bottom: env(safe-area-inset-bottom); /* iPhone-এর নিচের নচের জন্য */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+.nav-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--tg-theme-hint-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+.nav-button label {
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+.nav-button.active {
+    color: var(--tg-theme-button-color); /* সিলেক্টেড বাটন */
+}

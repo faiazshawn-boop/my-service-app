@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Bot</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+
+    <header class="app-header">
+        <h1>স্বাগতম!</h1>
+        <div class="balance-card">
+            <span>বর্তমান ব্যালেন্স</span>
+            <h2 id="balance-display">৳ ০.০০</h2>
+        </div>
+    </header>
+
+    <main id="app-content">
+
+        <section id="page-services" class="page active">
+            <h3>সকল সার্ভিস</h3>
+            <div class="service-list">
+                
+                <div class="service-item" data-service="SERVER_COPY">
+                    <img src="logo_placeholder.png" alt="logo" class="service-logo">
+                    <div class="service-info">
+                        <strong>সার্ভার কপি</strong>
+                        <span>ডেলিভারি: ১০ মিনিট</span>
+                    </div>
+                    <strong class="service-price">💰 ৮০ টাকা</strong>
+                </div>
+
+                <div class="service-item" data-service="ID_CARD">
+                    <img src="logo_placeholder.png" alt="logo" class="service-logo">
+                    <div class="service-info">
+                        <strong>আইডি কার্ড</strong>
+                        <span>ডেলিভারি: ২০ মিনিট</span>
+                    </div>
+                    <strong class="service-price">💰 ১৬০ টাকা</strong>
+                </div>
+
+                <div class="service-item" data-service="SMART_CARD">
+                    <img src="logo_placeholder.png" alt="logo" class="service-logo">
+                    <div class="service-info">
+                        <strong>স্মার্ট কার্ড</strong>
+                        <span>ডেলিভারি: ২০ মিনিট</span>
+                    </div>
+                    <strong class="service-price">💰 ৩৫০ টাকা</strong>
+                </div>
+                
+                <div class="service-item" data-service="BIOMETRIC">
+                    <img src="logo_placeholder.png" alt="logo" class="service-logo">
+                    <div class="service-info">
+                        <strong>বায়োমেট্রিক</strong>
+                        <span>ডেলিভারি: ৩০ মিনিট</span>
+                    </div>
+                    <strong class="service-price">💰 ৬৫০ টাকা</strong>
+                </div>
+
+                <div class="service-item" data-service="LOCATION">
+                    <img src="logo_placeholder.png" alt="logo" class="service-logo">
+                    <div class="service-info">
+                        <strong>লোকেশ</strong>
+                        <span>ডেলিভারি: ৩০ মিনিট</span>
+                    </div>
+                    <strong class="service-price">💰 ৮৫০ টাকা</strong>
+                </div>
+
+                <div class="service-item" data-service="CALL_LIST">
+                    <img src="logo_placeholder.png" alt="logo" class="service-logo">
+                    <div class="service-info">
+                        <strong>কল লিস্ট</strong>
+                        <span>ডেলিভারি: ২৪/৪৮ ঘন্টা</span>
+                    </div>
+                    <strong class="service-price">💰 ১৯০০ টাকা</strong>
+                </div>
+
+                <div class="service-item" data-service="ID_TO_NUMBER">
+                    <img src="logo_placeholder.png" alt="logo" class="service-logo">
+                    <div class="service-info">
+                        <strong>আইডি টু নাম্বার</strong>
+                        <span>ডেলিভারি: ২০ মিনিট</span>
+                    </div>
+                    <strong class="service-price">💰 ৯০০ টাকা</strong>
+                </div>
+                
+                <div class="service-item" data-service="TIN_CERTIFICATE">
+                    <img src="logo_placeholder.png" alt="logo" class="service-logo">
+                    <div class="service-info">
+                        <strong>টিন সার্টিফিকেট</strong>
+                        <span>ডেলিভারি: ১০ মিনিট</span>
+                    </div>
+                    <strong class="service-price">💰 ২০০ টাকা</strong>
+                </div>
+                
+                <div class="service-item" data-service="BKASH_INFO">
+                    <img src="logo_placeholder.png" alt="logo" class="service-logo">
+                    <div class="service-info">
+                        <strong>বিকাশ ইনফর্মেশন</strong>
+                        <span>ডেলিভারি: অফিস টাইম</span>
+                    </div>
+                    <strong class="service-price">💰 ২৫০০ টাকা</strong>
+                </div>
+                
+                <div class="service-item" data-service="NAGAD_INFO">
+                    <img src="logo_placeholder.png" alt="logo" class="service-logo">
+                    <div class="service-info">
+                        <strong>নগদ ইনফর্মেশন</strong>
+                        <span>ডেলিভারি: অফিস টাইম</span>
+                    </div>
+                    <strong class="service-price">💰 ১৫০০ টাকা</strong>
+                </div>
+                
+                <div class="service-item" data-service="LOST_ID_CARD">
+                    <img src="logo_placeholder.png" alt="logo" class="service-logo">
+                    <div class="service-info">
+                        <strong>হারানো আইডি কার্ড</strong>
+                        <span>ডেলিভারি: অফিস টাইম</span>
+                    </div>
+                    <strong class="service-price">💰 ১৬০০ টাকা</strong>
+                </div>
+                
+                <div class="service-item" data-service="NEW_BIRTH_CERTIFICATE">
+                    <img src="logo_placeholder.png" alt="logo" class="service-logo">
+                    <div class="service-info">
+                        <strong>নতুন জন্ম নিবন্ধন</strong>
+                        <span>ডেলিভারি: ৪৮ ঘন্টা</span>
+                    </div>
+                    <strong class="service-price">💰 ২৪০০ টাকা</strong>
+                </div>
+                
+                <div class="service-item" data-service="MRP_PASSPORT">
+                    <img src="logo_placeholder.png" alt="logo" class="service-logo">
+                    <div class="service-info">
+                        <strong>MRP পাসপোর্ট SB</strong>
+                        <span>ডেলিভারি: অফিস টাইম</span>
+                    </div>
+                    <strong class="service-price">💰 ১৪০০ টাকা</strong>
+                </div>
+                
+                <div class="service-item" data-service="E_PASSPORT">
+                    <img src="logo_placeholder.png" alt="logo" class="service-logo">
+                    <div class="service-info">
+                        <strong>ই-পাসপোর্ট SB</strong>
+                        <span>ডেলিভারি: অফিস টাইম</span>
+                    </div>
+                    <strong class="service-price">💰 ১৪০০ টাকা</strong>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="page-order-form" class="page">
+            <h2>অর্ডার করুন</h2>
+            <div id="order-form-container"></div>
+            <button id="back-to-services" class="btn btn-secondary">⬅️ ফিরে যান</button>
+        </section>
+
+        <section id="page-history" class="page">
+            <h3>অর্ডার হিস্টরি</h3>
+            <div class="history-table">
+                <div class="history-header">
+                    <div>#</div>
+                    <div>অর্ডারের ধরন</div>
+                    <div>তথ্য</div>
+                    <div>ডাউনলোড</div>
+                    <div>রেট</div>
+                    <div>সময়</div>
+                </div>
+                <div id="history-list-container">
+                </div>
+            </div>
+        </section>
+        
+        <section id="page-notifications" class="page">
+            <h3>নোটিফিকেশন</h3>
+            <div id="notification-list">
+                <p>কোনো নতুন নোটিফিকেশন নেই।</p>
+            </div>
+        </section>
+
+    </main>
+
+    <nav class="bottom-nav">
+        <button class="nav-button active" data-page="services">
+            <span>🏠</span>
+            <label>সার্ভিস</label>
+        </button>
+        <button class="nav-button" data-page="history">
+            <span>📜</span>
+            <label>হিস্টরি</label>
+        </button>
+        <button class="nav-button" data-page="notifications">
+            <span>🔔</span>
+            <label>নোটিফিকেশন</label>
+        </button>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>
