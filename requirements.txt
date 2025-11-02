@@ -1,6 +1,0 @@
-pyTelegramBotAPI
-gspread
-oauth2client
-Flask
-gunicorn
-flask-cors
