@@ -5,29 +5,29 @@ tg.expand();
 tg.BackButton.onClick(showServiceListPage); // 'Back' বাটনে ক্লিক করলে সার্ভিস পেজে ফিরবে
 tg.BackButton.hide(); // প্রথমে বাটনটি হাইড রাখা
 
-// ===== আপনার bot.py থেকে প্রোডাক্ট লিস্ট (হুবহু কপি) =====
-// (ইমোজি ছাড়া)
+// ===== আপনার bot.py থেকে প্রোডাক্ট লিস্ট (সঠিক করা) =====
+// (Python-এর "True" কে JavaScript-এর "true" করা হয়েছে)
 const products = {
     "SERVER_COPY": {
-        "name": "সার্ভার কপি", "price": 80, "enabled": True, "delivery": "১০ মিনিট",
+        "name": "সার্ভার কপি", "price": 80, "enabled": true, "delivery": "১০ মিনিট",
         "fields": [{"label": "NID নাম্বার", "type": "text", "example": "10/13/17 সংখ্যা"}, {"label": "জন্ম তারিখ", "type": "text", "example": "DD-MM-YYYY"}]
     },
     "ID_CARD": {
-        "name": "আইডি কার্ড", "price": 160, "enabled": True, "delivery": "২০ মিনিট",
+        "name": "আইডি কার্ড", "price": 160, "enabled": true, "delivery": "২০ মিনিট",
         "sub_options": {
             "nid": {"name": "এনআইডি নাম্বার", "fields": [{"label": "নাম (বাংলায়)", "type": "text"}, {"label": "NID নাম্বার", "type": "text"}, {"label": "জন্ম তারিখ", "type": "text"}]},
             "voter_slip": {"name": "ভোটার স্লিপ নাম্বার", "fields": [{"label": "নাম (বাংলায়)", "type": "text"}, {"label": "ভোটার স্লিপ নাম্বার", "type": "text"}, {"label": "জন্ম তারিখ", "type": "text"}]}
         }
     },
     "SMART_CARD": {
-        "name": "স্মার্ট কার্ড", "price": 350, "enabled": True, "delivery": "২০ মিনিট",
+        "name": "স্মার্ট কার্ড", "price": 350, "enabled": true, "delivery": "২০ মিনিট",
         "sub_options": {
              "nid": {"name": "এনআইডি নাম্বার", "fields": [{"label": "নাম (বাংলায়)", "type": "text"}, {"label": "NID নাম্বার", "type": "text"}, {"label": "জন্ম তারিখ", "type": "text"}]},
             "voter_slip": {"name": "ভোটার স্লিপ নাম্বার", "fields": [{"label": "নাম (বাংলায়)", "type": "text"}, {"label": "ভোটার স্লিপ নাম্বার", "type": "text"}, {"label": "জন্ম তারিখ", "type": "text"}]}
         }
     },
      "BIOMETRIC": {
-        "name": "বায়োমেট্রিক", "price": 650, "enabled": True, "delivery": "৩০ মিনিট",
+        "name": "বায়োমেট্রিক", "price": 650, "enabled": true, "delivery": "৩০ মিনিট",
         "sub_options": {
             "bl": {"name": "বাংলালিংক", "fields": [{"label": "বাংলালিংক নাম্বার", "type": "text"}]},
             "gp": {"name": "গ্রামীন", "fields": [{"label": "গ্রামীন নাম্বার", "type": "text"}]},
@@ -37,7 +37,7 @@ const products = {
         }
     },
     "LOCATION": {
-        "name": "লোকেশ", "price": 850, "enabled": True, "delivery": "৩০ মিনিট",
+        "name": "লোকেশ", "price": 850, "enabled": true, "delivery": "৩০ মিনিট",
         "sub_options": {
              "bl": {"name": "বাংলালিংক", "fields": [{"label": "বাংলালিংক নাম্বার", "type": "text"}]},
             "gp": {"name": "গ্রামীন", "fields": [{"label": "গ্রামীন নাম্বার", "type": "text"}]},
@@ -47,7 +47,7 @@ const products = {
         }
     },
     "CALL_LIST": {
-        "name": "কল লিস্ট", "price": 1900, "enabled": True, "delivery": "২৪/৪৮ ঘন্টা",
+        "name": "কল লিস্ট", "price": 1900, "enabled": true, "delivery": "২৪/৪৮ ঘন্টা",
         "sub_options": {
              "bl": {"name": "বাংলালিংক", "fields": [{"label": "বাংলালিংক নাম্বার", "type": "text"}]},
             "gp": {"name": "গ্রামীন", "fields": [{"label": "গ্রামীন নাম্বার", "type": "text"}]},
@@ -57,11 +57,11 @@ const products = {
         }
     },
     "ID_TO_NUMBER": {
-        "name": "আইডি টু নাম্বার", "price": 900, "enabled": True, "delivery": "২০ মিনিট",
+        "name": "আইডি টু নাম্বার", "price": 900, "enabled": true, "delivery": "২০ মিনিট",
         "fields": [{"label": "NID নাম্বার", "type": "text"}, {"label": "জন্ম সাল", "type": "text", "example": "YYYY"}]
     },
     "TIN_CERTIFICATE": {
-        "name": "টিন সার্টিফিকেট", "price": 200, "enabled": True, "delivery": "১০ মিনিট",
+        "name": "টিন সার্টিফিকেট", "price": 200, "enabled": true, "delivery": "১০ মিনিট",
         "sub_options": {
             "nid": {"name": "NID NO", "fields": [{"label": "NID NO", "type": "text"}]},
             "tin": {"name": "TIN NO", "fields": [{"label": "TIN NO", "type": "text"}]},
@@ -70,10 +70,10 @@ const products = {
             "passport": {"name": "PASSPORT NO", "fields": [{"label": "PASSPORT NO", "type": "text"}]}
         }
     },
-    "BKASH_INFO": { "name": "বিকাশ ইনফর্মেশন", "price": 2500, "enabled": True, "delivery": "অফিস টাইম", "fields": [{"label": "বিকাশ নাম্বার", "type": "text"}]},
-    "NAGAD_INFO": { "name": "নগদ ইনফর্মেশন", "price": 1500, "enabled": True, "delivery": "অফিস টাইম", "fields": [{"label": "নগদ নাম্বার", "type": "text"}]},
+    "BKASH_INFO": { "name": "বিকাশ ইনফর্মেশন", "price": 2500, "enabled": true, "delivery": "অফিস টাইম", "fields": [{"label": "বিকাশ নাম্বার", "type": "text"}]},
+    "NAGAD_INFO": { "name": "নগদ ইনফর্মেশন", "price": 1500, "enabled": true, "delivery": "অফিস টাইম", "fields": [{"label": "নগদ নাম্বার", "type": "text"}]},
     "LOST_ID_CARD": {
-        "name": "হারানো আইডি কার্ড", "price": 1600, "enabled": True, "delivery": "অফিস টাইম", 
+        "name": "হারানো আইডি কার্ড", "price": 1600, "enabled": true, "delivery": "অফিস টাইম", 
         "fields": [ 
             {"label": "নাম", "type": "text"}, {"label": "পিতার নাম", "type": "text"}, {"label": "মাতার নাম", "type": "text"}, 
             {"label": "বিভাগ", "type": "text"}, {"label": "জেলা", "type": "text"}, {"label": "উপজেলা", "type": "text"}, 
@@ -82,7 +82,7 @@ const products = {
         ]
     },
     "NEW_BIRTH_CERTIFICATE": {
-        "name": "নতুন জন্ম নিবন্ধন", "price": 2400, "enabled": True, "delivery": "৪৮ ঘন্টা", 
+        "name": "নতুন জন্ম নিবন্ধন", "price": 2400, "enabled": true, "delivery": "৪৮ ঘন্টা", 
         "fields": [ 
             {"label": "নাম (বাংলায়)", "type": "text"}, {"label": "Name (ENGLISH)", "type": "text"}, {"label": "জন্ম তারিখ", "type": "text", "example": "DD-MM-YYYY"}, 
             {"label": "পিতার নাম (বাংলায়)", "type": "text"}, {"label": "Father's Name (ENGLISH)", "type": "text"}, {"label": "মাতার নাম (বাংলায়)", "type": "text"}, 
@@ -94,7 +94,7 @@ const products = {
         ]
     },
      "MRP_PASSPORT": {
-        "name": "MRP পাসপোর্ট SB", "price": 1400, "enabled": True, "delivery": "অফিস টাইম", 
+        "name": "MRP পাসপোর্ট SB", "price": 1400, "enabled": true, "delivery": "অফিস টাইম", 
         "sub_options": { 
             "nid": {"name": "NID NO", "fields": [{"label": "NID NO", "type": "text"}, {"label": "জন্ম তারিখ", "type": "text"}]}, 
             "passport": {"name": "PASSPORT NO", "fields": [{"label": "PASSPORT NO", "type": "text"}, {"label": "জন্ম তারিখ", "type": "text"}]}, 
@@ -102,7 +102,7 @@ const products = {
         }
     },
     "E_PASSPORT": {
-        "name": "ই-পাসপোর্ট SB", "price": 1400, "enabled": True, "delivery": "অফিস টাইম", 
+        "name": "ই-পাসপোর্ট SB", "price": 1400, "enabled": true, "delivery": "অফিস টাইম", 
         "sub_options": { 
             "nid": {"name": "NID NO", "fields": [{"label": "NID NO", "type": "text"}, {"label": "জন্ম তারিখ", "type": "text"}]}, 
             "passport": {"name": "PASSPORT NO", "fields": [{"label": "PASSPORT NO", "type": "text"}, {"label": "জন্ম তারিখ", "type": "text"}]}, 
@@ -130,7 +130,6 @@ function showLoader(show) {
 }
 
 function showAlert(message) {
-    // এই সিস্টেমটি সিম্পল, কোনো লাইব্রেরি ছাড়া কাজ করে
     alert(message);
 }
 
@@ -141,9 +140,8 @@ function loadServiceList() {
     
     for (const key in products) {
         const service = products[key];
-        // এই সিস্টেমটি GSM অ্যাপ থেকে চলবে, তাই enabled চেক করার দরকার নেই,
-        // কারণ products লিস্টটি bot.py থেকে কপি করা
-        // if (!service.enabled) continue; 
+        // enabled: true (সঠিক JavaScript) চেক করা হচ্ছে
+        if (!service.enabled) continue; 
 
         const serviceHtml = `
             <div class="service-item" data-service="${key}">
@@ -201,22 +199,7 @@ function loadOrderForm(serviceKey) {
             </div>
             <hr>
             ${generateFormFields(service.fields)}
-            <button classimg src="logo_placeholder.png" alt="logo" class="service-logo">
-                    <div class="service-info">
-                        <strong>সার্ভার কপি</strong>
-                        <span>ডেলিভারি: ১০ মিনিট</span>
-                    </div>
-                    <strong class="service-price">💰 ৮০ টাকা</strong>
-                </div>
-
-                <div class="service-item" data-service="ID_CARD">
-                    <img src="logo_placeholder.png" alt="logo" class="service-logo">
-                    <div class="service-info">
-                        <strong>আইডি কার্ড</strong>
-                        <span>ডেলিভারি: ২০ মিনিট</span>
-                    </div>
-                    <strong class="service-price">💰 ১৬০ টাকা</strong>
-                </div>="btn btn-primary" id="submit-order-btn">✅ অর্ডার সাবমিট করুন</button>
+            <button class="btn btn-primary" id="submit-order-btn">✅ অর্ডার সাবমিট করুন</button>
         `;
     }
 
@@ -273,10 +256,12 @@ function addSubmitListener(serviceKey, subOptionKey) {
         fields.forEach(field => {
             if (field.type !== 'photo') { // ছবি ছাড়া অন্য ইনপুটগুলো চেক
                 const input = document.getElementById(`field-${field.label}`);
-                if (!input.value) {
+                if (!input || !input.value) { // ইনপুট ভ্যালু আছে কিনা চেক
                     allFieldsValid = false;
                 }
-                formData[field.label] = input.value;
+                if(input) { // ইনপুট থাকলে তবেই ডেটা নেওয়া
+                    formData[field.label] = input.value;
+                }
             }
         });
 
