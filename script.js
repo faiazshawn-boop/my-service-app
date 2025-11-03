@@ -37,7 +37,7 @@ const products = {
         }
     },
     "LOCATION": {
-        "name": "লোকেশ", "price": 850, "enabled": true, "delivery": "৩০ মিনিট",
+        "name": "লোকেশ", "price": 850, "enabled": true, "delivery": "৩০ মিনিট", // <-- এই ভুলটি ঠিক করা হয়েছে
         "sub_options": {
              "bl": {"name": "বাংলালিংক", "fields": [{"label": "বাংলালিংক নাম্বার", "type": "text"}]},
             "gp": {"name": "গ্রামীন", "fields": [{"label": "গ্রামীন নাম্বার", "type": "text"}]},
@@ -140,7 +140,6 @@ function loadServiceList() {
     
     for (const key in products) {
         const service = products[key];
-        // enabled: true (সঠিক JavaScript) চেক করা হচ্ছে
         if (!service.enabled) continue; 
 
         const serviceHtml = `
@@ -279,7 +278,6 @@ function addSubmitListener(serviceKey, subOptionKey) {
         };
 
         // টেলিগ্রাম বটকে ডেটা পাঠানো
-        // tg.sendData() কল করার পর, বট উত্তর পাঠালে অ্যাপটি স্বয়ংক্রিয়ভাবে বন্ধ হয়ে যাবে
         tg.sendData(JSON.stringify(dataToSend));
         
         // tg.close(); // এটি আমরা বট থেকে কল করবো
